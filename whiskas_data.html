@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    
+    
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4">Vet Notes </span>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="whiskas_home.html" class="nav-link" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="whiskas_reports.html" class="nav-link">Reports</a></li>
+            <li class="nav-item"><a href="whiskas_data.html" class="nav-link active">Enter Data</a></li>
+            <li class="nav-item"><a href="whiskas_login.html" class="nav-link">Sign-in</a></li>
+            
+          </ul>
+        </header>
+        
+    
+        <div class="cover-container d-flex  p-3 mx-auto flex-column text-center bg-light">
+            <header class="col-md-6 p-lg-2 mx-auto my-6">
+              <div>
+                <h3 class="display-2 fw-normal">Enter your data</h3>
+               
+              </div>
+            </header>
+        </div>
+    <form id="form">
+        <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+            <label for="date" class="form-label">Date</label> 
+            <div class="input-group mb-3">
+                <input id='date' type="date"><br><br> 
+            </div>
+        </div>
+
+        <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+            <label for="pet_name" class="form-label">Pet name</label> <br>  
+            <div class="input-group mb-3">
+                
+           <input id='pet_name' type="text" class="form-control" placeholder="Pet name" aria-label="Pet name" >
+            </div>
+
+        <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+            <label for="notes" class="form-label">Observations</label> 
+            <div class="input-group">
+            
+            <textarea id='notes' class="form-control" type="text" placeholder="Enter a description of the pets' activities"></textarea><br><br>
+            </div><br>
+        </div>
+        
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="app">
+            <label class="form-check-label" for="app">Loss of appetite</label><br>
+        
+            <input type="checkbox" class="form-check-input" id="weight">
+            <label class="form-check-label" for="weight">Weight gain or loss</label><br>
+
+            <input type="checkbox" class="form-check-input" id="tired">
+            <label class="form-check-label" for="tired">Sluggish and/or tired</label><br>
+
+            <input type="checkbox" class="form-check-input" id="mobility">
+            <label class="form-check-label" for="mobility">Mobility issues</label><br>
+        </div><br>
+        
+        
+        <button id='btn' type="submit" class="btn btn-primary">Submit data</button>
+        
+    </form>
+    
+    <script src="whiskas.js"></script>
+    <script>
+        
+        
+
+
+        const form = document.getElementById("form");
+        const pet_name = document.getElementById("pet_name")
+        const date = document.getElementById('date')
+        const notes = document.getElementById('notes')
+        const btn = document.getElementById('btn')
+        const useData = async () => {};
+        
+        window.addEventListener("DOMContentLoaded", useData);
+        
+        btn.addEventListener("submit", async (e) => {
+          e.preventDefault();
+        
+          const { data, error } = await supabase
+          .from('pet_health')
+          .insert(
+            {
+              pet_name: pet_name.value,
+              date: date.value,
+              Notes: notes.value
+            });
+           // insert data into supabase
+
+                 
+          useData();
+        });
+                 
+                 </script> 
+</body>
+</html>
